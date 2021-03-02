@@ -38,6 +38,8 @@ app.get("/", function (req, res) {
            console.log(body);  
         }
     );
+
+    res.send("Done.");
 });
 
 app.get("/webhook", function (req, res) {
