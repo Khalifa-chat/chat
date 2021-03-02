@@ -17,6 +17,34 @@ app.get("/", function (req, res) {
 });
 
 app.get("/", function (req, res) {
+   setupGreetingText();
+   setupGetStartedButton();
+
+    res.send("Done.");
+});
+
+function setupGetStartedButton(){
+    var data = {
+        "get_started":{
+            "payload":"GET_STARTED_PAYLOAD"
+          }
+    }
+
+    request(
+        {
+            url: "https://graph.facebook.com/v10.0/me/messenger_profile?access_token=" + PAGE_ACCESS_TOKEN,
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+       form: data
+        },
+        function (error, response, body){
+           console.log(response);
+           console.log(body);  
+        }
+    );
+}
+
+function setupGreetingText(){
     var data = {
         "greeting": [
             {
@@ -38,9 +66,7 @@ app.get("/", function (req, res) {
            console.log(body);  
         }
     );
-
-    res.send("Done.");
-});
+}
 
 app.get("/webhook", function (req, res) {
     const PAGE_VERIFY_TOKEN = "khalifa0913964002";
